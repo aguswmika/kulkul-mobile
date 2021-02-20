@@ -5,103 +5,85 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:responsive_flutter/responsive_flutter.dart';
 import 'package:semantic_kulkul/controllers/explore_controller.dart';
 import 'package:semantic_kulkul/helpers/color_helper.dart';
-import 'package:semantic_kulkul/views/explore/components/kulkul_tab_view.dart';
+import 'package:semantic_kulkul/helpers/text_helper.dart';
+import 'package:semantic_kulkul/views/components/loading.dart';
+import 'package:semantic_kulkul/views/explore/components/location_component.dart';
 
-class ExploreView extends StatefulWidget {
-  @override
-  _ExploreViewState createState() => _ExploreViewState();
-}
-
-class _ExploreViewState extends State<ExploreView>
-    with SingleTickerProviderStateMixin {
-  final ExploreController exploreController = Get.put(ExploreController());
-  TabController tabController;
-
-  @override
-  void initState() {
-    tabController = TabController(length: 5, vsync: this);
-    super.initState();
-  }
-
-  void handleTabChange(int index) async {
-    switch (index) {
-      case 0:
-        // loading();
-        await exploreController.fetchKulkul('desa');
-        // closeLoading();
-        break;
-      case 1:
-        // loading();
-        await exploreController.fetchKulkul('banjar');
-        // closeLoading();
-        break;
-      case 2:
-        // loading();
-        await exploreController.fetchKulkul('puraDesa');
-        // closeLoading();
-        break;
-      case 3:
-        // loading();
-        await exploreController.fetchKulkul('puraPuseh');
-        // closeLoading();
-        break;
-      case 4:
-        // loading();
-        await exploreController.fetchKulkul('puraDalem');
-        // closeLoading();
-        break;
-    }
-  }
-
+class ExploreView extends GetView<ExploreController> {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ExploreController>(
-        init: ExploreController(),
-        initState: (state) async {
-          await exploreController.fetchKulkul('desa');
-          await exploreController.fetchKulkul('banjar');
-          await exploreController.fetchKulkul('puraDesa');
-          await exploreController.fetchKulkul('puraPuseh');
-          await exploreController.fetchKulkul('puraDalem');
-        },
-        builder: (controller) {
-          return NestedScrollView(
-              headerSliverBuilder:
-                  (BuildContext context, bool innerBoxIsScrolled) {
-                return [
-                  SliverAppBar(
-                    pinned: false,
-                    elevation: 0,
-                    centerTitle: false,
-                    actions: [
-                      IconButton(icon: Icon(Icons.search, color: ColorHelper.blackColor,), onPressed: (){}, tooltip: 'Search',)
-                    ],
-                    title: Text('Jelajahi Kulkul',
-                        style: TextStyle(color: ColorHelper.blackColor)),
-                    // flexibleSpace: FlexibleSpaceBar(title: Text('Jao'), background: ,),
-                    backgroundColor: Colors.transparent,
-                    bottom: TabBar(
-                        controller: this.tabController,
-                        onTap: this.handleTabChange,
-                        labelColor: ColorHelper.greenColor,
-                        indicatorWeight: ResponsiveFlutter.of(context).wp(1),
-                        indicatorColor: ColorHelper.greenColor,
-                        unselectedLabelColor: ColorHelper.grayColor,
-                        isScrollable: true,
-                        indicatorSize: TabBarIndicatorSize.label,
-                        tabs: [
-                          Tab(child: Text('Desa')),
-                          Tab(icon: Text('Banjar')),
-                          Tab(icon: Text('Pura Desa')),
-                          Tab(icon: Text('Pura Puseh')),
-                          Tab(icon: Text('Pura Dalem')),
-                        ]),
+    return NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return [
+            SliverAppBar(
+                pinned: false,
+                elevation: 0,
+                centerTitle: false,
+                actions: [
+                  IconButton(
+                    icon: Icon(
+                      Icons.search,
+                      color: ColorHelper.blackColor,
+                    ),
+                    onPressed: () {},
+                    tooltip: 'Search',
                   )
-                ];
-              },
-              body: KulkulTabView(
-                tabController: this.tabController,
+                ],
+                title: Text('Jelajahi Kulkul',
+                    style: TextStyle(color: ColorHelper.blackColor)),
+                // flexibleSpace: FlexibleSpaceBar(title: Text('Jao'), background: ,),
+                backgroundColor: Colors.transparent)
+          ];
+        },
+        body: controller.loading
+            ? Loading()
+            : ListView.builder(
+                itemBuilder: (BuildContext context, int index) {
+                  return controller.location[index].kecamatan.length > 0 ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: ResponsiveFlutter.of(context).wp(5)),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: ResponsiveFlutter.of(context).wp(5)),
+                        child: Text(
+                          controller.location[index].name,
+                          style: TextStyle(
+                              fontSize: Heading.h3,
+                              color: ColorHelper.blackColor,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                      Container(
+                        height: ResponsiveFlutter.of(context).hp(15),
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (BuildContext context, int index2) {
+                            return Container(
+                              width: ResponsiveFlutter.of(context).wp(60),
+                              margin: EdgeInsets.only(
+                                  left: index2 == 0
+                                      ? ResponsiveFlutter.of(context).wp(4)
+                                      : 0.0,
+                                  right: ResponsiveFlutter.of(context).wp(4),
+                                  bottom: ResponsiveFlutter.of(context).wp(4),
+                                  top: ResponsiveFlutter.of(context).wp(4)),
+                              child: LocationComponent(
+                                  title: controller
+                                      .location[index].kecamatan[index2].name,
+                                      image: controller
+                                      .location[index].kecamatan[index2].image),
+                            );
+                          },
+                          itemCount:
+                              controller.location[index].kecamatan.length,
+                        ),
+                      )
+                    ],
+                  ) : Container();
+                },
+                itemCount: controller.location.length,
               ));
-        });
   }
 }

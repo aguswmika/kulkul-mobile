@@ -8,6 +8,7 @@ abstract class ColorHelper {
   static Color lightGrayColor = HexColor('#CCCCCC');
   static Color grayColor = HexColor('#A5A5A5');
   static Color greenColor = HexColor('#407950');
+  static Color redColor = HexColor('#ef4f4f');
 
   static brightnessColor() {
     if (Platform.isIOS) {
