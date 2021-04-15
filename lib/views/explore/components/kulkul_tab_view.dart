@@ -22,11 +22,11 @@
 //           physics: NeverScrollableScrollPhysics(),
 //           controller: this.tabController,
 //           children: [
-//             !controller.loading ? tabKulkul(context, 'desa') : Loading(),
-//             !controller.loading ? tabKulkul(context, 'banjar') : Loading(),
-//             !controller.loading ? tabKulkul(context, 'puraDesa') : Loading(),
-//             !controller.loading ? tabKulkul(context, 'puraPuseh') : Loading(),
-//             !controller.loading ? tabKulkul(context, 'puraDalem') : Loading(),
+//             !controller.loading ? tabKulkul(context, 'desa') : LoadingComponent(),
+//             !controller.loading ? tabKulkul(context, 'banjar') : LoadingComponent(),
+//             !controller.loading ? tabKulkul(context, 'puraDesa') : LoadingComponent(),
+//             !controller.loading ? tabKulkul(context, 'puraPuseh') : LoadingComponent(),
+//             !controller.loading ? tabKulkul(context, 'puraDalem') : LoadingComponent(),
 //             !controller.loading
 //                 ? ListView(
 //                     children: [
@@ -64,7 +64,7 @@
 //                       ),
 //                     ],
 //                   )
-//                 : Loading(),
+//                 : LoadingComponent(),
 //           ],
 //         ));
 //   }

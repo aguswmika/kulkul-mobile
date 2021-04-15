@@ -5,8 +5,8 @@ import 'package:semantic_kulkul/repositories/location_repository.dart';
 
 class ExploreController extends GetxController {
   // KulkulRepository _repository = KulkulRepository();
-  LocationRepository _repositoryLocation = LocationRepository();
-  RxList<Location> location = List<Location>().obs;
+  final LocationRepository _repositoryLocation = LocationRepository();
+  RxList<Location> locations = <Location>[].obs;
   // List<Kulkul> _kulkulDesaList = List<Kulkul>().obs;
   // List<Kulkul> _kulkulBanjarList = List<Kulkul>().obs;
   // List<Kulkul> _kulkulPuraDesaList = List<Kulkul>().obs;
@@ -16,19 +16,19 @@ class ExploreController extends GetxController {
   RxBool _loading = true.obs;
 
   @override
-  void onInit() async {
-    await this.fetchLocations();
+  void onInit() {
+    this.fetchLocations();
 
     super.onInit();
   }
 
   Future<void> fetchLocations() async {
     this.loading = true;
-
+    
     List<Location> result = await _repositoryLocation.getAll();
 
     if (result != null)
-      this.location.addAll(result);
+      this.locations.assignAll(result);
     else {
       SnackbarHelper.error('Kesalahan', _repositoryLocation.message);
     }
@@ -37,7 +37,6 @@ class ExploreController extends GetxController {
   }
 
   set loading(bool value) => this._loading.value = value;
-
   bool get loading => this._loading.value;
 
   // Future<void> fetchAll() async {

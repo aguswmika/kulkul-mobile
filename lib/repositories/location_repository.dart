@@ -13,22 +13,59 @@ class LocationRepository extends Repository {
     List<Location> data;
 
     try {
-      Response api = await _api.get('${ConfigHelper.url}/v1/location',
+      Response api = await _api.get(Uri.parse('${ConfigHelper.url}/v1/location'),
           headers: {'Content-type': 'application/json'});
 
       var result = json.decode(api.body);
-      if (result['status'] == 'success') {
-        data = List<Location>();
+
+      this.status = result['status'];
+      this.message = result['message'];
+
+      if (this.status == 'success') {
+        data = <Location>[];
 
         if (result['data'] != null) {
           result['data'].forEach((item) {
             data.add(Location.fromMap(item));
           });
         }
-      } else {
-        this.message = result['message'];
-      }
+      } 
     } catch (error) {
+      this.status = 'fail';
+      this.message = 'Something went wrong';
+      
+      print(error);
+    }
+
+    return data;
+  }
+
+  Future<List<Desa>> getAllDesa(String id) async {
+    this.reset();
+    List<Desa> data;
+
+    try {
+      Response api = await _api.get(Uri.parse('${ConfigHelper.url}/v1/location/$id/desa'),
+          headers: {'Content-type': 'application/json'});
+
+      var result = json.decode(api.body);
+
+      this.status = result['status'];
+      this.message = result['message'];
+
+      if (result['status'] == 'success') {
+        data = <Desa>[];
+
+        if (result['data'] != null) {
+          result['data'].forEach((item) {
+            data.add(Desa.fromMap(item));
+          });
+        }
+      } 
+    } catch (error) {
+      this.status = 'fail';
+      this.message = 'Something went wrong';
+      
       print(error);
     }
 

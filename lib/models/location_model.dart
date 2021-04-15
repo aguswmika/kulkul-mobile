@@ -35,14 +35,10 @@ class Location {
 class Kecamatan {
   final String id;
   final String name;
-  final int totalKulkulDesa;
-  final int totalKulkulBanjar;
   final String image;
   Kecamatan({
     this.id,
     this.name,
-    this.totalKulkulDesa,
-    this.totalKulkulBanjar,
     this.image,
   });
 
@@ -50,8 +46,6 @@ class Kecamatan {
     return {
       'id': id,
       'name': name,
-      'totalKulkulDesa': totalKulkulDesa,
-      'totalKulkulBanjar': totalKulkulBanjar,
       'image': image,
     };
   }
@@ -62,8 +56,6 @@ class Kecamatan {
     return Kecamatan(
       id: map['id'],
       name: map['name'],
-      totalKulkulDesa: map['totalKulkulDesa'],
-      totalKulkulBanjar: map['totalKulkulBanjar'],
       image: map['image'],
     );
   }
@@ -91,8 +83,40 @@ class Desa {
 
   factory Desa.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
-  
+
     return Desa(
+      id: map['id'],
+      name: map['name'],
+      image: map['image'],
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+}
+
+class Banjar {
+  final String id;
+  final String name;
+  final String image;
+  Banjar({
+    this.id,
+    this.name,
+    this.image,
+  });
+  
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name,
+      'image': image,
+    };
+  }
+
+  factory Banjar.fromMap(Map<String, dynamic> map) {
+    if (map == null) return null;
+  
+    return Banjar(
       id: map['id'],
       name: map['name'],
       image: map['image'],

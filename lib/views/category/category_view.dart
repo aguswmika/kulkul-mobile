@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:semantic_kulkul/controllers/category_controller.dart';
 import 'package:semantic_kulkul/helpers/color_helper.dart';
 import 'package:semantic_kulkul/models/category_model.dart';
-import 'package:semantic_kulkul/views/components/loading.dart';
+import 'package:semantic_kulkul/views/components/loading_component.dart';
 
 class CategoryView extends GetView<CategoryController> {
   Widget handleListRecursive(Category data) {
@@ -42,7 +42,7 @@ class CategoryView extends GetView<CategoryController> {
               );
           },
           itemCount: controller.categories.length,
-        ) : Loading(),
+        ) : LoadingComponent(),
       ),
     );
   }

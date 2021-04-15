@@ -38,7 +38,7 @@ class HomeView extends StatelessWidget {
               ],
             ),
             // backgroundColor: ColorHelper.whi teColor,
-            body: SafeArea(child: _routes[controller.navIndex]),
+            body: Container(color: ColorHelper.whiteColor , child: SafeArea(child: _routes[controller.navIndex])),
           ),
         ));
   }

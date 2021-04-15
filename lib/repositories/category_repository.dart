@@ -7,46 +7,35 @@ import 'package:semantic_kulkul/repositories/repository.dart';
 
 class CategoryRepository extends Repository {
   final Client _api = Client();
-  String status;
-  String message;
 
   Future<List<Category>> getAll({location}) async {
     this.reset();
 
     List<Category> data;
     try {
-      Response api = await _api.get('${ConfigHelper.url}/v1/category',
+      Response api = await _api.get(Uri.parse('${ConfigHelper.url}/v1/category'),
           headers: {'Content-type': 'application/json'});
 
       var result = json.decode(api.body);
-      if (result['status'] == 'success') {
-        data = List<Category>();
+      this.status = result['status'];
+      this.message = result['message'];
+
+      if (this.status == 'success') {
+        data = <Category>[];
 
         if (result['data'] != null) {
           result['data'].forEach((item) {
             data.add(Category.fromMap(item));
           });
-        } else {
-          this.message = result['message'];
         }
       }
     } catch (error) {
       print(error);
+
+      this.status = 'fail';
+      this.message = 'Something went wrong';
     }
 
     return data;
-  }
-
-  void reset() {
-    this.status = null;
-    this.message = null;
-  }
-
-  String getStatus() {
-    return this.status;
-  }
-
-  String getMessage() {
-    return this.message;
   }
 }

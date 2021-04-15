@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:responsive_flutter/responsive_flutter.dart';
 import 'package:semantic_kulkul/helpers/color_helper.dart';
 import 'package:semantic_kulkul/helpers/text_helper.dart';
 import 'package:semantic_kulkul/models/kulkul_model.dart';
-import 'package:semantic_kulkul/routes.dart';
 
 class KulkulComponent extends StatelessWidget {
   final Kulkul data;
@@ -15,7 +13,7 @@ class KulkulComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.toNamed(AppRoute.KulkulDetailView, arguments: 'Apem');
+        // Get.toNamed(AppRoute.KulkulDetailView, parameters: 'Apem');
       },
       child: Container(
           decoration: BoxDecoration(
@@ -59,7 +57,7 @@ class KulkulComponent extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(data.name,
+                  Text(data.names[0],
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                           color: ColorHelper.blackColor,

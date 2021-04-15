@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget{
         fontFamily: 'Roboto',
       ),
       initialRoute: AppRoute.SplashView,
-      defaultTransition: Transition.rightToLeftWithFade,
+      defaultTransition: Transition.cupertino,
       getPages: Routes.pages
     );
   }

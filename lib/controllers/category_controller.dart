@@ -4,8 +4,8 @@ import 'package:semantic_kulkul/models/category_model.dart';
 import 'package:semantic_kulkul/repositories/category_repository.dart';
 
 class CategoryController extends GetxController {
-  RxList<Category> categories = List<Category>().obs;
-  CategoryRepository _repository = CategoryRepository();
+  final CategoryRepository _repository = CategoryRepository();
+  RxList<Category> categories = <Category>[].obs;
   RxBool _loading = true.obs;
 
   @override
@@ -24,7 +24,7 @@ class CategoryController extends GetxController {
   Future<void> fetchCategories() async {
     List<Category> result = await _repository.getAll();
     if (result != null) {
-      categories.addAll(result);
+      categories.assignAll(result);
     } else {
       SnackbarHelper.error('Kesalahan', _repository.message);
     }
