@@ -13,7 +13,7 @@ class KulkulComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // Get.toNamed(AppRoute.KulkulDetailView, parameters: 'Apem');
+        // Get.toNamed(Routes.KulkulDetailView, parameters: 'Apem');
       },
       child: Container(
           decoration: BoxDecoration(

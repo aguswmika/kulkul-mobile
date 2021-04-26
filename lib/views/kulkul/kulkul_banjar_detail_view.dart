@@ -24,9 +24,9 @@ class KulkulBanjarDetailView extends GetView<KulkulController> {
       ),
       body: GetX<KulkulController>(
         initState: (state) {
-          controller.fetchKulkulDesa();
+          controller.fetchKulkulBanjar(Get.parameters['id']);
         },
-        builder: (_) => _.loading
+        builder: (_) => _.loadingKulkulBanjar
             ? Container(child: LoadingComponent())
             : SingleChildScrollView(
                 child: Column(

@@ -8,12 +8,12 @@ class KulkulController extends GetxController {
   Rx<KulkulDesa> kulkulDesa = KulkulDesa().obs;
   Rx<Kulkul> kulkulBanjar = Kulkul().obs;
   RxBool _loading = true.obs;
+  RxBool _loadingKulkulBanjar = true.obs;
   RxInt _currentSlide = 0.obs;
 
-  Future<void> fetchKulkulDesa() async {
+  Future<void> fetchKulkulDesa(String id) async {
     this.loading = true;
-    KulkulDesa result =
-        await _kulkulRepository.getKulkulDesaById(Get.parameters['id']);
+    KulkulDesa result = await _kulkulRepository.getKulkulDesaById(id);
 
     if (_kulkulRepository.status == 'success') {
       kulkulDesa.value = result;
@@ -24,10 +24,9 @@ class KulkulController extends GetxController {
     this.loading = false;
   }
 
-  Future<void> fetchKulkulBanjar() async {
-    this.loading = true;
-    Kulkul result =
-        await _kulkulRepository.getKulkulBanjarById(Get.parameters['id']);
+  Future<void> fetchKulkulBanjar(String id) async {
+    this.loadingKulkulBanjar = true;
+    Kulkul result = await _kulkulRepository.getKulkulBanjarById(id);
 
     if (_kulkulRepository.status == 'success') {
       kulkulBanjar.value = result;
@@ -35,11 +34,14 @@ class KulkulController extends GetxController {
       SnackbarHelper.error('Kesalahan', _kulkulRepository.message);
     }
 
-    this.loading = false;
+    this.loadingKulkulBanjar = false;
   }
 
   set loading(bool value) => this._loading.value = value;
   bool get loading => this._loading.value;
+
+  set loadingKulkulBanjar(bool value) => this._loadingKulkulBanjar.value = value;
+  bool get loadingKulkulBanjar => this._loadingKulkulBanjar.value;
 
   set currentSlide(int value) => this._currentSlide.value = value;
   int get currentSlide => this._currentSlide.value;

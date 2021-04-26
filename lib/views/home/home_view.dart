@@ -6,7 +6,7 @@ import 'package:semantic_kulkul/helpers/color_helper.dart';
 import 'package:semantic_kulkul/views/category/category_view.dart';
 import 'package:semantic_kulkul/views/explore/explore_view.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends GetView<HomeController> {
   final List<Widget> _routes = [
     ExploreView(),
     CategoryView(),
@@ -15,9 +15,9 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.dark,
-        child: GetBuilder<HomeController>(
-          init: HomeController(),
-          builder: (controller) => Scaffold(
+        child: Obx(
+          () => Scaffold(
+            backgroundColor: Colors.white,
             bottomNavigationBar: BottomNavigationBar(
               currentIndex: controller.navIndex,
               selectedItemColor: ColorHelper.blueColor,
@@ -37,8 +37,7 @@ class HomeView extends StatelessWidget {
                 ),
               ],
             ),
-            // backgroundColor: ColorHelper.whi teColor,
-            body: Container(color: ColorHelper.whiteColor , child: SafeArea(child: _routes[controller.navIndex])),
+            body: Container(color: ColorHelper.whiteColor , child: _routes[controller.navIndex]),
           ),
         ));
   }

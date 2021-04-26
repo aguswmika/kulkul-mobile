@@ -37,7 +37,7 @@ class DesaView extends GetView<DesaController> {
                       right: ResponsiveFlutter.of(context).wp(5)),
                   child: LocationComponent(
                     onTap: () {
-                      Get.toNamed(AppRoute.KulkulDesaDetailView,
+                      Get.toNamed(Routes.KulkulDesaDetailView,
                           parameters: {
                             'id': controller.desas[index].id,
                             'title': controller.desas[index].name

@@ -1,10 +1,11 @@
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
-  int navIndex = 0;
+  RxInt _navIndex = 0.obs;
 
   void handleNavigation(int index) {
-    this.navIndex = index;
-    update();
+    _navIndex.value = index;
   }
+
+  int get navIndex => _navIndex.value;
 }

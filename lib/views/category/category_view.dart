@@ -34,6 +34,7 @@ class CategoryView extends GetView<CategoryController> {
           ];
         },
         body: !controller.loading ?  ListView.builder(
+          padding: EdgeInsets.zero,
           itemBuilder: (BuildContext context, int index) {
             Category data = controller.categories[index];
             return Theme(

@@ -13,13 +13,16 @@ class KulkulRepository extends Repository {
 
     KulkulDesa data;
     try {
-      Response response = await _api.get(Uri.parse('${ConfigHelper.url}/v1/kulkul/$id/desa'),
+      Response response = await _api.get(
+          Uri.parse('${ConfigHelper.url}/v1/kulkul/$id/desa'),
           headers: {'Content-type': 'application/json'});
 
       var result = json.decode(response.body);
 
       this.status = result['status'];
       this.message = result['message'];
+
+      print(result);
 
       if (this.status == 'success') {
         data = KulkulDesa.fromMap(result['data']);
@@ -39,7 +42,8 @@ class KulkulRepository extends Repository {
 
     Kulkul data;
     try {
-      Response response = await _api.get(Uri.parse('${ConfigHelper.url}/v1/kulkul/$id/banjar'),
+      Response response = await _api.get(
+          Uri.parse('${ConfigHelper.url}/v1/kulkul/$id/banjar'),
           headers: {'Content-type': 'application/json'});
 
       var result = json.decode(response.body);

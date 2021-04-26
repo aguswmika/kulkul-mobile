@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_flutter/responsive_flutter.dart';
 import 'package:semantic_kulkul/helpers/color_helper.dart';
+import 'package:semantic_kulkul/helpers/text_helper.dart';
 
 class CarouselComponent extends StatefulWidget {
   final List<String> images;
@@ -41,7 +42,7 @@ class _CarouselComponentState extends State<CarouselComponent> {
                       child: Image.network(
                         item,
                         fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) => Text('404'),
+                        errorBuilder: (context, error, stackTrace) => Center(child: Text('Gambar Rusak', style: TextStyle(color: Colors.white, fontSize: Heading.h3),)),
                       ),
                     ));
               }).toList(),

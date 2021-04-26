@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:semantic_kulkul/routes.dart';
 
 void main() {
+  EasyLoading.instance.maskType = EasyLoadingMaskType.black;
   runApp(MyApp());
 }
 
@@ -19,9 +21,10 @@ class MyApp extends StatelessWidget{
       theme: ThemeData(
         fontFamily: 'Roboto',
       ),
-      initialRoute: AppRoute.SplashView,
+      initialRoute: Routes.SplashView,
       defaultTransition: Transition.cupertino,
-      getPages: Routes.pages
+      getPages: Pages.pages,
+      builder: EasyLoading.init(),
     );
   }
 }

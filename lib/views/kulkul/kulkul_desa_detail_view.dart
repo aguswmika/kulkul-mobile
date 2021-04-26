@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:responsive_flutter/responsive_flutter.dart';
 import 'package:semantic_kulkul/controllers/kulkul_controller.dart';
 import 'package:semantic_kulkul/helpers/color_helper.dart';
+import 'package:semantic_kulkul/routes.dart';
 import 'package:semantic_kulkul/views/components/loading_component.dart';
 import 'package:semantic_kulkul/views/explore/components/location_component.dart';
 import 'package:semantic_kulkul/views/kulkul/components/kulkul_caption_component.dart';
@@ -26,7 +27,7 @@ class KulkulDesaDetailView extends GetView<KulkulController> {
       ),
       body: GetX<KulkulController>(
         initState: (state) {
-          controller.fetchKulkulDesa();
+          controller.fetchKulkulDesa(Get.parameters['id']);
         },
         builder: (_) => _.loading
             ? Container(child: LoadingComponent())
@@ -66,7 +67,13 @@ class KulkulDesaDetailView extends GetView<KulkulController> {
                                                       .hp(10),
                                               image: e.image,
                                               title: e.name,
-                                              onTap: () {},
+                                              onTap: () {
+                                                Get.toNamed(Routes
+                                                    .KulkulBanjarDetailView, parameters: {
+                                                      'id' : e.id,
+                                                      'title': e.name
+                                                    });
+                                              },
                                             ),
                                           ))
                                       .toList(),
@@ -85,4 +92,3 @@ class KulkulDesaDetailView extends GetView<KulkulController> {
     );
   }
 }
-

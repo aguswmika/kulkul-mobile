@@ -13,7 +13,7 @@ class SplashController extends GetxController {
     //   exploreController.fetchKulkulByCategory()
     // ]);
     Future.delayed(Duration(seconds: 3)).then((value) {
-      Get.offNamed(AppRoute.HomeView);
+      Get.offNamed(Routes.HomeView);
     });
     super.onInit();
   }
