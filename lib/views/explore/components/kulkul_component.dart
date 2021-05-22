@@ -57,7 +57,7 @@ class KulkulComponent extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(data.names[0],
+                  Text(data.names[0].value,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                           color: ColorHelper.blackColor,

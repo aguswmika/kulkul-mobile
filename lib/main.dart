@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -6,6 +7,7 @@ import 'package:semantic_kulkul/routes.dart';
 
 void main() {
   EasyLoading.instance.maskType = EasyLoadingMaskType.black;
+  AudioPlayer.logEnabled = true;
   runApp(MyApp());
 }
 

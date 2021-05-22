@@ -5,12 +5,13 @@ import 'package:semantic_kulkul/controllers/home_controller.dart';
 import 'package:semantic_kulkul/helpers/color_helper.dart';
 import 'package:semantic_kulkul/views/category/category_view.dart';
 import 'package:semantic_kulkul/views/explore/explore_view.dart';
+import 'package:semantic_kulkul/views/user/user_view.dart';
 
 class HomeView extends GetView<HomeController> {
   final List<Widget> _routes = [
     ExploreView(),
     CategoryView(),
-    Container(),
+    UserView(),
   ];
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(

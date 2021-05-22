@@ -27,7 +27,8 @@ class KulkulDesaDetailView extends GetView<KulkulController> {
       ),
       body: GetX<KulkulController>(
         initState: (state) {
-          controller.fetchKulkulDesa(Get.parameters['id']);
+          WidgetsBinding.instance.addPostFrameCallback(
+              (_) => controller.fetchKulkulDesa(Get.parameters['id']));
         },
         builder: (_) => _.loading
             ? Container(child: LoadingComponent())
@@ -43,13 +44,15 @@ class KulkulDesaDetailView extends GetView<KulkulController> {
                             alignment: Alignment.center,
                             padding: EdgeInsets.only(
                                 top: ResponsiveFlutter.of(context).wp(6),
-                                bottom: ResponsiveFlutter.of(context).wp(6)),
-                            child: Text('Data kulkul desa tidak tersedia')),
+                                bottom: ResponsiveFlutter.of(context).wp(3)),
+                            child: Text('Data Kulkul Desa tidak tersedia')),
                     _.kulkulDesa.value.banjars.length > 0
                         ? Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal:
-                                    ResponsiveFlutter.of(context).wp(5)),
+                            padding: EdgeInsets.only(
+                                left:
+                                    ResponsiveFlutter.of(context).wp(5),
+                                    right: 
+                                    ResponsiveFlutter.of(context).wp(5), bottom: ResponsiveFlutter.of(context).wp(6)),
                             child: KulkulCaptionComponent(
                                 title: 'Banjar Yang Dimiliki',
                                 bottom: 0,
@@ -68,9 +71,11 @@ class KulkulDesaDetailView extends GetView<KulkulController> {
                                               image: e.image,
                                               title: e.name,
                                               onTap: () {
-                                                Get.toNamed(Routes
-                                                    .KulkulBanjarDetailView, parameters: {
-                                                      'id' : e.id,
+                                                Get.toNamed(
+                                                    Routes
+                                                        .KulkulBanjarDetailView,
+                                                    parameters: {
+                                                      'id': e.id,
                                                       'title': e.name
                                                     });
                                               },
@@ -83,8 +88,8 @@ class KulkulDesaDetailView extends GetView<KulkulController> {
                             alignment: Alignment.center,
                             padding: EdgeInsets.only(
                                 top: ResponsiveFlutter.of(context).wp(6),
-                                bottom: ResponsiveFlutter.of(context).wp(6)),
-                            child: Text('Data banjar tidak tersedia')),
+                                bottom: ResponsiveFlutter.of(context).wp(12)),
+                            child: Text('Data Banjar tidak tersedia')),
                   ],
                 ),
               ),

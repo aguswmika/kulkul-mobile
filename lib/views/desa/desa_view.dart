@@ -28,6 +28,7 @@ class DesaView extends GetView<DesaController> {
             ? LoadingComponent()
             : ListView.builder(
               shrinkWrap: true,
+              padding: EdgeInsets.zero,
               itemBuilder: (BuildContext context, int index) {
                 return Container(
                   margin: EdgeInsets.only(

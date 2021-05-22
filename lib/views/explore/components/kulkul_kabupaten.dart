@@ -44,6 +44,7 @@ class KulkulKabupaten extends StatelessWidget {
           child: ListView.builder(
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
+            padding: EdgeInsets.zero,
             itemBuilder: (BuildContext context, int index) {
               return Container(
                   width: ResponsiveFlutter.of(context).wp(45),

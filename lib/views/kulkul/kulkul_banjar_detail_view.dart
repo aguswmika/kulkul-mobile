@@ -24,7 +24,8 @@ class KulkulBanjarDetailView extends GetView<KulkulController> {
       ),
       body: GetX<KulkulController>(
         initState: (state) {
-          controller.fetchKulkulBanjar(Get.parameters['id']);
+          WidgetsBinding.instance.addPostFrameCallback(
+              (_) => controller.fetchKulkulBanjar(Get.parameters['id']));
         },
         builder: (_) => _.loadingKulkulBanjar
             ? Container(child: LoadingComponent())
@@ -41,7 +42,7 @@ class KulkulBanjarDetailView extends GetView<KulkulController> {
                             padding: EdgeInsets.only(
                                 top: ResponsiveFlutter.of(context).wp(6),
                                 bottom: ResponsiveFlutter.of(context).wp(6)),
-                            child: Text('Data kulkul banjar tidak tersedia')),
+                            child: Text('Data Kulkul Banjar tidak tersedia')),
                   ],
                 ),
               ),
@@ -49,4 +50,3 @@ class KulkulBanjarDetailView extends GetView<KulkulController> {
     );
   }
 }
-

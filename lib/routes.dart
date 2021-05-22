@@ -7,17 +7,23 @@ import 'package:semantic_kulkul/controllers/kulkul_controller.dart';
 import 'package:semantic_kulkul/controllers/search_controller.dart';
 import 'package:semantic_kulkul/controllers/splash_controller.dart';
 import 'package:semantic_kulkul/views/desa/desa_view.dart';
+import 'package:semantic_kulkul/views/explore/explore_pura_view.dart';
 import 'package:semantic_kulkul/views/home/home_view.dart';
 import 'package:semantic_kulkul/views/kulkul/kulkul_desa_detail_view.dart';
 import 'package:semantic_kulkul/views/kulkul/kulkul_banjar_detail_view.dart';
+import 'package:semantic_kulkul/views/kulkul/kulkul_pura_detail_view.dart';
+import 'package:semantic_kulkul/views/kulkul/kulkul_view.dart';
 import 'package:semantic_kulkul/views/search/search_view.dart';
 import 'package:semantic_kulkul/views/splash/splash_view.dart';
 
 abstract class Routes {
   static const HomeView = '/';
   static const SplashView = '/splash';
+  static const ExplorePuraView = '/explore-pura';
+  static const KulkulView = '/kulkul';
   static const KulkulDesaDetailView = '/kulkul-desa-detail';
   static const KulkulBanjarDetailView = '/kulkul-banjar-detail';
+  static const KulkulPuraDetailView = '/kulkul-pura-detail';
   static const DesaView = '/desa';
   static const SearchView = '/search';
 }
@@ -26,6 +32,8 @@ class Pages {
   static final List<GetPage> pages = [
     GetPage(
         name: Routes.HomeView, page: () => HomeView(), binding: HomeBinding()),
+         GetPage(
+        name: Routes.ExplorePuraView, page: () => ExplorePuraView(), binding: ExploreBinding()),
     GetPage(
         name: Routes.SplashView,
         page: () => SplashView(),
@@ -39,11 +47,21 @@ class Pages {
         page: () => KulkulDesaDetailView(),
         binding: KulkulBinding()),
     GetPage(
+        name: Routes.KulkulPuraDetailView,
+        page: () => KulkulPuraDetailView(),
+        binding: KulkulBinding()),
+    GetPage(
+        name: Routes.KulkulView,
+        page: () => KulkulView(),
+        binding: KulkulBinding()),
+    GetPage(
         name: Routes.DesaView, page: () => DesaView(), binding: DesaBinding()),
     GetPage(
         name: Routes.DesaView, page: () => DesaView(), binding: DesaBinding()),
-        GetPage(
-        name: Routes.SearchView, page: () => SearchView(), binding: SearchBinding()),
+    GetPage(
+        name: Routes.SearchView,
+        page: () => SearchView(),
+        binding: SearchBinding()),
   ];
 }
 
@@ -63,10 +81,17 @@ class HomeBinding implements Bindings {
   }
 }
 
+class ExploreBinding implements Bindings{
+  @override
+  void dependencies() {
+    Get.lazyPut(() => ExploreController(), fenix: true);
+  }
+}
+
 class KulkulBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => KulkulController());
+    Get.lazyPut(() => KulkulController(), fenix: true);
   }
 }
 

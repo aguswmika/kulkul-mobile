@@ -17,12 +17,12 @@ class KulkulRepository extends Repository {
           Uri.parse('${ConfigHelper.url}/v1/kulkul/$id/desa'),
           headers: {'Content-type': 'application/json'});
 
+      // print(response.body);
       var result = json.decode(response.body);
 
       this.status = result['status'];
       this.message = result['message'];
 
-      print(result);
 
       if (this.status == 'success') {
         data = KulkulDesa.fromMap(result['data']);
@@ -63,38 +63,31 @@ class KulkulRepository extends Repository {
 
     return data;
   }
-  // Future<KulkulResult> getAll({location}) async {
-  //   KulkulResult result;
-  //   String _location = 'desa';
-  //   try {
-  //     if (location != null) {
-  //       _location = location;
-  //     }
-  //     Response api = await _api.get(
-  //         '${ConfigHelper.url}/v1/kulkul-location/$_location',
-  //         headers: {'Content-type': 'application/json'});
 
-  //     result = KulkulResult.fromMap(json.decode(api.body));
-  //   } catch (error) {
-  //     print(error);
-  //   }
+  Future<KulkulPura> getKulkulPuraById(String id) async {
+    this.reset();
 
-  //   return result;
-  // }
+    KulkulPura data;
+    try {
+      Response response = await _api.get(
+          Uri.parse('${ConfigHelper.url}/v1/kulkul/$id/pura'),
+          headers: {'Content-type': 'application/json'});
 
-  // Future<KulkulResultByKabupaten> getByKabupaten() async {
-  //   KulkulResultByKabupaten result;
+      var result = json.decode(response.body);
 
-  //   try {
-  //     Response api = await _api.get(
-  //         '${ConfigHelper.url}/v1/kulkul',
-  //         headers: {'Content-type': 'application/json'});
+      this.status = result['status'];
+      this.message = result['message'];
 
-  //     result = KulkulResultByKabupaten.fromMap(json.decode(api.body));
-  //   } catch (error) {
-  //     print(error);
-  //   }
+      if (this.status == 'success') {
+        data = KulkulPura.fromMap(result['data']);
+      }
+    } catch (error) {
+      this.status = 'fail';
+      this.message = 'Something went wrong';
 
-  //   return result;
-  // }
+      print(error);
+    }
+
+    return data;
+  }
 }

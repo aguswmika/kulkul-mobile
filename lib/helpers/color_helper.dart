@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 abstract class ColorHelper {
   static Color blueColor = HexColor('#1f4068');
+  static Color darBlueColor = HexColor('#04009a');
   static Color lightBlueColor = HexColor('#bbe1fa');
   static Color whiteColor = Colors.white;
   static Color blackColor = HexColor('#2D2D2D');

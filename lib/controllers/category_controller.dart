@@ -10,11 +10,7 @@ class CategoryController extends GetxController {
 
   @override
   void onInit() async {
-    this.loading = true;
-
     await this.fetchCategories();
-
-    this.loading = false;
     super.onInit();
   }
 
@@ -22,11 +18,14 @@ class CategoryController extends GetxController {
   set loading(bool value) => this._loading.value = value;
 
   Future<void> fetchCategories() async {
+    this.loading = true;
     List<Category> result = await _repository.getAll();
     if (result != null) {
       categories.assignAll(result);
     } else {
       SnackbarHelper.error('Kesalahan', _repository.message);
     }
+
+    this.loading = false;
   }
 }

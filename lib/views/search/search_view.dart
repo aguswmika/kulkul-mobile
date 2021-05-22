@@ -4,10 +4,18 @@ import 'package:responsive_flutter/responsive_flutter.dart';
 import 'package:semantic_kulkul/controllers/search_controller.dart';
 import 'package:semantic_kulkul/helpers/color_helper.dart';
 import 'package:semantic_kulkul/helpers/text_helper.dart';
+import 'package:semantic_kulkul/routes.dart';
 import 'package:semantic_kulkul/views/components/loading_component.dart';
 import 'package:semantic_kulkul/views/components/separator_component.dart';
 
 class SearchView extends GetView<SearchController> {
+  String parsePura(String data) {
+    String result;
+    result = data.replaceAll('Pura Desa', '');
+    result = result.replaceAll('Pura Puseh', '');
+    result = result.replaceAll('Pura Dalem', '');
+    return 'Pura Khayangan Tiga'+result;
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,24 +53,73 @@ class SearchView extends GetView<SearchController> {
                                           : 0,
                                       bottom:
                                           ResponsiveFlutter.of(context).wp(6)),
-                                  child: Text(
-                                    '${(index+1)}. ${controller.search[index].value}',
-                                    style: TextStyle(
-                                        fontSize: Heading.h4,
-                                        color: ColorHelper.blackColor),
+                                  child: InkWell(
+                                    onTap: () {
+                                      if (controller.selectedOutput.value !=
+                                          'lokasi') {
+                                        Get.toNamed(Routes.KulkulView,
+                                            parameters: {
+                                              'id': controller.search[index].id,
+                                              'type': controller
+                                                  .selectedOutput.value == 'aktivitas' ? 'kegiatan' : controller
+                                                  .selectedOutput.value,
+                                              'title':
+                                                  '${controller.selectedOutput.value.split('_').join(' ').capitalize} - ${controller.search[index].value}',
+                                            });
+                                      } else {
+                                        String kulkulTipe = controller
+                                            .search[index].value
+                                            .split(' ')[0];
+                                        Get.toNamed(
+                                            kulkulTipe == 'Desa'
+                                                ? Routes.KulkulDesaDetailView
+                                                : (kulkulTipe == 'Banjar'
+                                                    ? Routes
+                                                        .KulkulBanjarDetailView
+                                                    : Routes
+                                                        .KulkulPuraDetailView),
+                                            parameters: {
+                                              'id': controller.search[index].id,
+                                              'title':
+                                                  '${kulkulTipe == 'Desa' || kulkulTipe == 'Banjar' ? controller.search[index].value : parsePura(controller.search[index].value)}'
+                                            });
+                                      }
+                                    },
+                                    child: Text(
+                                      '${(index + 1)}. ${controller.search[index].value}',
+                                      style: TextStyle(
+                                          fontSize: Heading.h4,
+                                          color: Colors.blue),
+                                    ),
                                   ),
                                 ),
                             itemCount: controller.search.length),
                         Container(
-                          padding: EdgeInsets.all(ResponsiveFlutter.of(context).wp(5)),
-                          margin: EdgeInsets.only(bottom: ResponsiveFlutter.of(context).hp(12)),
-                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(ResponsiveFlutter.of(context).wp(5)), color: ColorHelper.lightBlueColor),
+                            padding: EdgeInsets.all(
+                                ResponsiveFlutter.of(context).wp(5)),
+                            margin: EdgeInsets.only(
+                                bottom: ResponsiveFlutter.of(context).hp(12)),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                    ResponsiveFlutter.of(context).wp(5)),
+                                color: ColorHelper.lightBlueColor),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('Query :', style: TextStyle(color: ColorHelper.blackColor, fontSize: Heading.h3, fontWeight: FontWeight.w600)),
-                                SeparatorComponent(height: 4,),
-                                Text('${controller.query.value}', style: TextStyle(color: ColorHelper.blackColor, fontSize: Heading.h4),)
+                                Text('Query :',
+                                    style: TextStyle(
+                                        color: ColorHelper.blackColor,
+                                        fontSize: Heading.h3,
+                                        fontWeight: FontWeight.w600)),
+                                SeparatorComponent(
+                                  height: 4,
+                                ),
+                                Text(
+                                  '${controller.query.value}',
+                                  style: TextStyle(
+                                      color: ColorHelper.blackColor,
+                                      fontSize: Heading.h4),
+                                )
                               ],
                             ))
                       ],
