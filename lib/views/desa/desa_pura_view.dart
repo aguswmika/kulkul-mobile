@@ -8,7 +8,7 @@ import 'package:semantic_kulkul/routes.dart';
 import 'package:semantic_kulkul/views/components/loading_component.dart';
 import 'package:semantic_kulkul/views/explore/components/location_component.dart';
 
-class DesaView extends GetView<DesaController> {
+class DesaPuraView extends GetView<DesaController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,9 +27,9 @@ class DesaView extends GetView<DesaController> {
         body: GetX(
             initState: (_) {
               WidgetsBinding.instance
-                .addPostFrameCallback((_) =>controller.fetchAllDesa(Get.parameters['id']));
+                .addPostFrameCallback((_) =>controller.fetchAllPuraDesa(Get.parameters['id']));
             },
-            builder: (_) => controller.loading
+            builder: (_) => controller.loadingPura
                 ? LoadingComponent()
                 : ListView.builder(
                     shrinkWrap: true,
@@ -45,19 +45,19 @@ class DesaView extends GetView<DesaController> {
                             right: ResponsiveFlutter.of(context).wp(5)),
                         child: LocationComponent(
                           onTap: () {
-                            Get.toNamed(Routes.KulkulDesaDetailView,
+                            Get.toNamed(Routes.KulkulPuraDetailView,
                                 parameters: {
-                                  'id': controller.desas[index].id,
-                                  'title': controller.desas[index].name
+                                  'id': controller.puraDesas[index].id,
+                                  'title': controller.puraDesas[index].name
                                 });
                           },
                           height: ResponsiveFlutter.of(context).wp(20),
-                          title: controller.desas[index].name,
-                          image: controller.desas[index].image,
+                          title: controller.puraDesas[index].name,
+                          image: controller.puraDesas[index].image,
                         ),
                       );
                     },
-                    itemCount: controller.desas.length,
+                    itemCount: controller.puraDesas.length,
                   )));
   }
 }

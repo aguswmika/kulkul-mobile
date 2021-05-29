@@ -6,6 +6,7 @@ import 'package:semantic_kulkul/controllers/home_controller.dart';
 import 'package:semantic_kulkul/controllers/kulkul_controller.dart';
 import 'package:semantic_kulkul/controllers/search_controller.dart';
 import 'package:semantic_kulkul/controllers/splash_controller.dart';
+import 'package:semantic_kulkul/views/desa/desa_pura_view.dart';
 import 'package:semantic_kulkul/views/desa/desa_view.dart';
 import 'package:semantic_kulkul/views/explore/explore_pura_view.dart';
 import 'package:semantic_kulkul/views/home/home_view.dart';
@@ -18,13 +19,14 @@ import 'package:semantic_kulkul/views/splash/splash_view.dart';
 
 abstract class Routes {
   static const HomeView = '/';
+  static const ExplorePuraView = '/pura';
   static const SplashView = '/splash';
-  static const ExplorePuraView = '/explore-pura';
   static const KulkulView = '/kulkul';
-  static const KulkulDesaDetailView = '/kulkul-desa-detail';
-  static const KulkulBanjarDetailView = '/kulkul-banjar-detail';
-  static const KulkulPuraDetailView = '/kulkul-pura-detail';
+  static const KulkulDesaDetailView = '/kulkul/desa/detail';
+  static const KulkulBanjarDetailView = '/kulkul/banjar/detail';
+  static const KulkulPuraDetailView = '/kulkul/pura/detail';
   static const DesaView = '/desa';
+  static const DesaPuraView = '/desa/pura';
   static const SearchView = '/search';
 }
 
@@ -56,6 +58,8 @@ class Pages {
         binding: KulkulBinding()),
     GetPage(
         name: Routes.DesaView, page: () => DesaView(), binding: DesaBinding()),
+      GetPage(
+        name: Routes.DesaPuraView, page: () => DesaPuraView(), binding: DesaBinding()),
     GetPage(
         name: Routes.DesaView, page: () => DesaView(), binding: DesaBinding()),
     GetPage(

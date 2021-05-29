@@ -12,7 +12,7 @@ class CategoryView extends GetView<CategoryController> {
   Widget handleListRecursive(Category data, {String type}) {
     if (data.child == null) {
       return ListTile(
-        title: Text(data.nama),
+        title: Text(data.nama, style: TextStyle(color: Colors.blue),),
         onTap: () {
           if (data.id == 'Kabupaten') {
             Get.find<HomeController>().handleNavigation(0);
