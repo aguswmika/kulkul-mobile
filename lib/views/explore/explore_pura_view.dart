@@ -77,14 +77,14 @@ class ExplorePuraView extends GetView<ExploreController> {
                                               .wp(4)),
                                       child: LocationComponent(
                                           onTap: () {
-                                            Get.toNamed(Routes.DesaView,
+                                            Get.toNamed(Routes.DesaPuraView,
                                                 parameters: {
                                                   'id': controller
-                                                      .locations[index]
+                                                      .puraLocations[index]
                                                       .kecamatan[index2]
                                                       .id,
                                                   'title': controller
-                                                      .locations[index]
+                                                      .puraLocations[index]
                                                       .kecamatan[index2]
                                                       .name,
                                                 });
@@ -96,7 +96,7 @@ class ExplorePuraView extends GetView<ExploreController> {
                                     );
                                   },
                                   itemCount: controller
-                                      .locations[index].kecamatan.length,
+                                      .puraLocations[index].kecamatan.length,
                                 ),
                               )
                             ],

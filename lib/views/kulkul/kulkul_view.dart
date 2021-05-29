@@ -92,7 +92,7 @@ class LocationListComponent extends StatelessWidget {
                                       color: ColorHelper.lightBlueColor,
                                       width: 4))),
                           child: Text(
-                            element.title,
+                            element.title == 'Pura' ? 'Pura Khayangan Tiga' : element.title,
                             style: TextStyle(fontSize: Heading.h2),
                           ),
                         ),
