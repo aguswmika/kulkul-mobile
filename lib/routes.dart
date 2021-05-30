@@ -16,6 +16,7 @@ import 'package:semantic_kulkul/views/kulkul/kulkul_pura_detail_view.dart';
 import 'package:semantic_kulkul/views/kulkul/kulkul_view.dart';
 import 'package:semantic_kulkul/views/search/search_view.dart';
 import 'package:semantic_kulkul/views/splash/splash_view.dart';
+import 'package:semantic_kulkul/views/user/login_view.dart';
 
 abstract class Routes {
   static const HomeView = '/';
@@ -28,14 +29,17 @@ abstract class Routes {
   static const DesaView = '/desa';
   static const DesaPuraView = '/desa/pura';
   static const SearchView = '/search';
+  static const LoginView = '/login';
 }
 
 class Pages {
   static final List<GetPage> pages = [
     GetPage(
         name: Routes.HomeView, page: () => HomeView(), binding: HomeBinding()),
-         GetPage(
-        name: Routes.ExplorePuraView, page: () => ExplorePuraView(), binding: ExploreBinding()),
+    GetPage(
+        name: Routes.ExplorePuraView,
+        page: () => ExplorePuraView(),
+        binding: ExploreBinding()),
     GetPage(
         name: Routes.SplashView,
         page: () => SplashView(),
@@ -58,14 +62,19 @@ class Pages {
         binding: KulkulBinding()),
     GetPage(
         name: Routes.DesaView, page: () => DesaView(), binding: DesaBinding()),
-      GetPage(
-        name: Routes.DesaPuraView, page: () => DesaPuraView(), binding: DesaBinding()),
+    GetPage(
+        name: Routes.DesaPuraView,
+        page: () => DesaPuraView(),
+        binding: DesaBinding()),
     GetPage(
         name: Routes.DesaView, page: () => DesaView(), binding: DesaBinding()),
     GetPage(
         name: Routes.SearchView,
         page: () => SearchView(),
         binding: SearchBinding()),
+      GetPage(
+        name: Routes.LoginView,
+        page: () => LoginView()),
   ];
 }
 
@@ -85,7 +94,7 @@ class HomeBinding implements Bindings {
   }
 }
 
-class ExploreBinding implements Bindings{
+class ExploreBinding implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut(() => ExploreController(), fenix: true);
