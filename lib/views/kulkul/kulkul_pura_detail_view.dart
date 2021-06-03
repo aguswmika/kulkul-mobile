@@ -44,7 +44,7 @@ class KulkulPuraDetailView extends GetView<KulkulController> {
                         child: Text(
                           Get.parameters['title'],
                           style: TextStyle(
-                              color: ColorHelper.darBlueColor,
+                              color: ColorHelper.darkBlueColor,
                               fontSize: Heading.h2,
                               fontWeight: FontWeight.w700),
                           textAlign: TextAlign.center,
