@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:responsive_flutter/responsive_flutter.dart';
+import 'package:semantic_kulkul/controllers/user_controller.dart';
 import 'package:semantic_kulkul/helpers/color_helper.dart';
 import 'package:semantic_kulkul/helpers/text_helper.dart';
 import 'package:semantic_kulkul/views/components/separator_component.dart';
 import 'package:semantic_kulkul/views/components/text_form_component.dart';
 
-class LoginView extends StatelessWidget {
-  final formKey = GlobalKey<FormState>();
+class LoginView extends GetView<UserController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +33,7 @@ class LoginView extends StatelessWidget {
                       horizontal: ResponsiveFlutter.of(context).wp(5)),
                   padding: EdgeInsets.all(ResponsiveFlutter.of(context).wp(2)),
                   child: Form(
-                      // key: formKey,
+                      key: controller.formKey,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,9 +63,9 @@ class LoginView extends StatelessWidget {
                             autocorrect: false,
                             hintText: 'Masukkan username',
                             onChanged: (String value) {
-                              // controller.user.update((item) {
-                              //   item.username = value;
-                              // });
+                              controller.user.update((item) {
+                                item.username = value;
+                              });
                             },
                             validator: (String value) {
                               if (value.isEmpty || value == null) {
@@ -92,9 +93,9 @@ class LoginView extends StatelessWidget {
                             autocorrect: false,
                             hintText: 'Masukkan password',
                             onChanged: (String value) {
-                              // controller.user.update((item) {
-                              //   item.password = value;
-                              // });
+                              controller.user.update((item) {
+                                item.password = value;
+                              });
                             },
                             validator: (String value) {
                               if (value.isEmpty || value == null) {
@@ -128,7 +129,7 @@ class LoginView extends StatelessWidget {
                                     side: BorderSide.none))),
                         onPressed: () {
                           FocusScope.of(context).requestFocus(new FocusNode());
-                          // controller.handleLogin();
+                          controller.handleLogin();
                         }),
                   ),
                 )

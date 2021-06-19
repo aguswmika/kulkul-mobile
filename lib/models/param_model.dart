@@ -109,3 +109,4 @@ class Search {
         "value": value,
       };
 }
+

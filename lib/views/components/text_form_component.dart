@@ -15,6 +15,8 @@ class TextFormComponent extends StatefulWidget {
   final Function(String) validator;
   final int maxLines;
   final TextInputType keyboardType;
+  final TextEditingController controller;
+  final String initialValue;
 
   TextFormComponent(
       {Key key,
@@ -27,7 +29,8 @@ class TextFormComponent extends StatefulWidget {
       this.hintText,
       this.validator,
       this.maxLines,
-      this.keyboardType})
+      this.keyboardType,
+      this.controller, this.initialValue})
       : super(key: key);
 
   @override
@@ -55,6 +58,7 @@ class _TextFormComponentState extends State<TextFormComponent> {
   Widget build(BuildContext context) {
     return TextFormField(
       focusNode: _focusNode,
+      initialValue: widget.initialValue,
       validator: widget.validator ?? null,
       onChanged: widget.onChanged ?? (String value) {},
       inputFormatters: widget.inputFormatters ?? null,
@@ -63,6 +67,7 @@ class _TextFormComponentState extends State<TextFormComponent> {
       autocorrect: widget.autocorrect ?? true,
       keyboardType: widget.keyboardType ?? TextInputType.text,
       maxLines: widget.maxLines ?? 1,
+      controller: widget.controller ?? null,
       onEditingComplete: () {
         _focusNode.unfocus();
       },
@@ -70,7 +75,7 @@ class _TextFormComponentState extends State<TextFormComponent> {
           hintText: widget.hintText ?? null,
           prefixIcon: widget.prefixIcon ?? null,
           contentPadding: EdgeInsets.symmetric(
-              horizontal: ResponsiveFlutter.of(context).wp(2),
+              horizontal: ResponsiveFlutter.of(context).wp(3),
               vertical: ResponsiveFlutter.of(context).wp(4)),
           enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(

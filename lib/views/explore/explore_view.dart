@@ -40,13 +40,7 @@ class ExploreView extends GetView<ExploreController> {
                   backgroundColor: Colors.transparent)
             ];
           },
-          body: GetX<ExploreController>(
-            initState: (_){
-              WidgetsBinding.instance.addPostFrameCallback(
-              (_) =>
-              controller.fetchLocations());
-            },
-            builder: (_) => controller.loading
+          body: Obx(() => controller.loading
                 ? LoadingComponent()
                 : RefreshIndicator(
                     onRefresh: () async {

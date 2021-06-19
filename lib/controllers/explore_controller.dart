@@ -11,9 +11,15 @@ class ExploreController extends GetxController {
   RxBool _loading = true.obs;
   RxBool _loadingPura = true.obs;
 
+  @override
+  void onInit() {
+    fetchLocations();
+    super.onInit();
+  }
+
   Future<void> fetchLocations() async {
     this.loading = true;
-    
+
     List<Location> result = await _repositoryLocation.getAll();
 
     if (result != null)
@@ -27,7 +33,7 @@ class ExploreController extends GetxController {
 
   Future<void> fetchPuraLocations() async {
     this.loadingPura = true;
-    
+
     List<Location> result = await _repositoryLocation.getAllPura();
 
     if (result != null)
