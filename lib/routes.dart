@@ -17,6 +17,7 @@ import 'package:semantic_kulkul/views/kulkul/kulkul_desa_detail_view.dart';
 import 'package:semantic_kulkul/views/kulkul/kulkul_banjar_detail_view.dart';
 import 'package:semantic_kulkul/views/kulkul/kulkul_pura_detail_view.dart';
 import 'package:semantic_kulkul/views/kulkul/kulkul_view.dart';
+import 'package:semantic_kulkul/views/populate/populate_kulkul_sound_view.dart';
 import 'package:semantic_kulkul/views/populate/populate_kulkul_view.dart';
 import 'package:semantic_kulkul/views/populate/populate_view.dart';
 import 'package:semantic_kulkul/views/search/search_view.dart';
@@ -37,6 +38,7 @@ abstract class Routes {
   static const LoginView = '/login';
   static const PopulateView = '/populate';
   static const PopulateKulkulView = '/populate/kulkul';
+  static const PopulateKulkulSoundView = '/populate/kulkul/sound';
 }
 
 class Pages {
@@ -87,9 +89,13 @@ class Pages {
         name: Routes.PopulateView,
         page: () => PopulateView(),
         binding: PopulateBinding()),
-        GetPage(
+    GetPage(
         name: Routes.PopulateKulkulView,
         page: () => PopulateKulkulView(),
+        binding: PopulateBinding()),
+    GetPage(
+        name: Routes.PopulateKulkulSoundView,
+        page: () => PopulateKulkulSoundView(),
         binding: PopulateBinding()),
   ];
 }

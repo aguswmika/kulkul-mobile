@@ -2,18 +2,18 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StorageService extends GetxService {
-  SharedPreferences _prefs;
+  SharedPreferences prefs;
 
   Future<void> setToken(String token) async {
-    await _prefs.setString('token', token);
+    await prefs.setString('token', token);
   }
 
   String getToken() {
-    return _prefs.getString('token');
+    return prefs.getString('token');
   }
 
   void removeToken() {
-    _prefs.remove('token');
+    prefs.remove('token');
   }
 
   // @override
@@ -24,7 +24,7 @@ class StorageService extends GetxService {
   // }
 
   Future<StorageService> init() async {
-    _prefs = await SharedPreferences.getInstance();
+    prefs = await SharedPreferences.getInstance();
 
     return this;
   }

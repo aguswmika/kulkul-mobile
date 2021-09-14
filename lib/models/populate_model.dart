@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'dart:io';
 
+import 'package:flutter/material.dart';
+
 class PopulateKulkul {
     PopulateKulkul({
         this.number,
@@ -73,14 +75,16 @@ class ItemLang {
 class Sound {
     Sound({
         this.name,
+        this.lang,
         this.activities,
         this.file,
         this.type,
     });
 
-    String name;
+    TextEditingController name;
+    String lang;
     List<Activity> activities;
-    File file;
+    List<File> file;
     String type;
 
     factory Sound.fromJson(String str) => Sound.fromMap(json.decode(str));
@@ -89,15 +93,17 @@ class Sound {
 
     factory Sound.fromMap(Map<String, dynamic> json) => Sound(
         name: json["name"] == null ? null : json["name"],
+        lang: json["lang"] == null ? null : json["lang"],
         activities: json["activities"] == null ? null : List<Activity>.from(json["activities"].map((x) => Activity.fromMap(x))),
-        file: json["file"] == null ? null : json["file"],
+        file: json["file"] == null ? null : List<File>.from(json["file"].map((x) => x)),
         type: json["type"] == null ? null : json["type"],
     );
 
     Map<String, dynamic> toMap() => {
-        "name": name == null ? null : name,
+        "name": name.text == null ? null : name.text,
+        "lang": lang == null ? null : lang,
         "activities": activities == null ? null : List<dynamic>.from(activities.map((x) => x.toMap())),
-        "file": file == null ? null : file,
+        "file": file == null ? null : List<dynamic>.from(file.map((x) => x)),
         "type": type == null ? null : type,
     };
 }
@@ -109,7 +115,7 @@ class Activity {
         this.lang,
     });
 
-    String name;
+    TextEditingController name;
     String group;
     String lang;
 
@@ -124,7 +130,7 @@ class Activity {
     );
 
     Map<String, dynamic> toMap() => {
-        "name": name == null ? null : name,
+        "name": name.text == null ? null : name.text,
         "group": group == null ? null : group,
         "lang": lang == null ? null : lang,
     };

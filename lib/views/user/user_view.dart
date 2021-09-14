@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:responsive_flutter/responsive_flutter.dart';
+import 'package:semantic_kulkul/controllers/home_controller.dart';
 import 'package:semantic_kulkul/controllers/user_controller.dart';
 import 'package:semantic_kulkul/helpers/color_helper.dart';
+import 'package:semantic_kulkul/helpers/snackbar_helper.dart';
 import 'package:semantic_kulkul/helpers/text_helper.dart';
 import 'package:semantic_kulkul/routes.dart';
+import 'package:semantic_kulkul/services/storage_service.dart';
 import 'package:semantic_kulkul/views/components/separator_component.dart';
 
 class UserView extends GetView<UserController> {
@@ -70,7 +73,38 @@ class UserView extends GetView<UserController> {
                       height: 5,
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        showDialog(
+                        context: Get.context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text('Konfirmasi'),
+                            content: Text('Apakah Anda yakin ingin keluar?'),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () {
+                                  Get.back();
+                                },
+                                child: Text('Tidak'),
+                              ),
+                              TextButton(
+                                onPressed: () async {
+                                  Get.back();
+                                  Get.find<StorageService>().removeToken();
+                                  Get.find<HomeController>().handleNavigation(0);
+                                  SnackbarHelper.info('Informasi',
+                                      'Anda berhasil keluar',);
+                                },
+                                child: Text(
+                                  'Ya',
+                                  style: TextStyle(fontWeight: FontWeight.w700),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                      },
                       child: Container(
                         width: double.infinity,
                         child: Text(

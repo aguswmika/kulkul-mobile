@@ -4,9 +4,11 @@ import 'package:semantic_kulkul/helpers/snackbar_helper.dart';
 
 class KulkulSoundComponent extends StatefulWidget {
   final String url;
+  final bool isLocal;
   KulkulSoundComponent({
     Key key,
     @required this.url,
+    this.isLocal,
   }) : super(key: key);
   @override
   _KulkulSoundComponentState createState() => _KulkulSoundComponentState();
@@ -25,7 +27,8 @@ class _KulkulSoundComponentState extends State<KulkulSoundComponent> {
     setState(() {
       isPlayed = true;
     });
-    int result = await _audioPlayer.play(widget.url);
+    int result =
+        await _audioPlayer.play(widget.url, isLocal: widget.isLocal ?? false);
 
     if (result != 1) {
       SnackbarHelper.error('Kesalahan', 'Tidak dapat memutar audio');

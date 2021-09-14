@@ -10,13 +10,10 @@ class SplashController extends GetxController {
   }
 
   Future<void> init() async {
-    // await initServices();
     await Get.find<UserController>().fetchUser();
     await Future.delayed(Duration(seconds: 3));
     Get.offNamed(Routes.HomeView);
   }
 
-  Future<void> initServices() async {
-    
-  }
+  Future<void> initServices() async {}
 }

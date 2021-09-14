@@ -18,7 +18,7 @@ class UserRepository extends Repository {
       this.status = result['status'];
 
       if (this.status == 'success') {
-        state.Get.find<StorageService>().setToken(result['data']);
+        await state.Get.find<StorageService>().setToken(result['data']);
       } else {
         this.message = result['message'];
       }
@@ -33,6 +33,7 @@ class UserRepository extends Repository {
   Future<User> getUser() async {
     User data;
     try {
+      print(state.Get.find<StorageService>().getToken());
       Response response = await api.get('/v1/me');
 
       Map<String, dynamic> result = response.data;

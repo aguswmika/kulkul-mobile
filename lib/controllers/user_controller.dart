@@ -9,7 +9,7 @@ import 'package:semantic_kulkul/repositories/user_repository.dart';
 class UserController extends GetxController {
   Rx<User> user = User().obs;
   final formKey = GlobalKey<FormState>();
-  final UserRepository _userRepository =
+  UserRepository _userRepository =
       UserRepository(ApiHelper.getInstance());
 
   Future<void> fetchUser() async {
@@ -35,6 +35,7 @@ class UserController extends GetxController {
       EasyLoading.dismiss();
 
       if (_userRepository.status == 'success') {
+        _userRepository = UserRepository(ApiHelper.getInstance());
         await this.fetchUser();
         Get.back();
         SnackbarHelper.success('Berhasil', 'Anda berhasil login');
